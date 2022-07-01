@@ -13,20 +13,21 @@ $productRows = DB::table('products')->orderBy('id')->get();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Production Table</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <container class="container-fluid">
         <div class="product">
             <label for="product">Choose a PCB:</label>
-            <select name="product" id="product">
+            <select name="product" id="productSelect">
                 <option value="0">Select a PCB</option>
                 @foreach($productRows as $row)
                 <option value="{{ $row->id}}"> {{ $row->pcb}} - {{ $row->id }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="productions">
+        <div class="productions" id="productionsTable">
             <table class="table table-bordered">
                 <thead>
                     <th>Id</th>
@@ -56,3 +57,25 @@ $productRows = DB::table('products')->orderBy('id')->get();
         </div>
     </container>
 </body>
+<script>
+    $('#productSelect').change(function(){
+        var selectedProductId = $('#productSelect option:selected');
+
+        if(selectedProductId.text !='Select a PCB'){
+            var table = document.getElementById("productionsTable");
+            var all_row = table.getElementsByTagName("tr");
+            for (var i=0; i<all_row.length;i++){
+                var name_column = all_row[i].getElementsByTagName("td")[1];
+                if(name_column){
+                    var name_value = name_column.textContent || name_column.innerText;
+                    if(name_value.match(selectedProductId.val())){
+                        all_row[i].style.display="";
+                    }
+                    else{
+                        all_row[i].style.display="none";
+                    }
+                }
+            }
+        }
+    });
+</script>
