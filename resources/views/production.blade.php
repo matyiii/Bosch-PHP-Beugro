@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
 
 $productionRows = DB::table('production')->orderBy('id')->get();
 $productRows = DB::table('products')->orderBy('id')->get();
@@ -21,8 +20,9 @@ $productRows = DB::table('products')->orderBy('id')->get();
         <div class="product">
             <label for="product">Choose a PCB:</label>
             <select name="product" id="product">
+                <option value="0">Select a PCB</option>
                 @foreach($productRows as $row)
-                <option value="{{ $row->id}}"> {{ $row->pcb}}</option>
+                <option value="{{ $row->id}}"> {{ $row->pcb}} - {{ $row->id }}</option>
                 @endforeach
             </select>
         </div>
