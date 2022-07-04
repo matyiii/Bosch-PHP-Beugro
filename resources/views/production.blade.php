@@ -1,21 +1,5 @@
-<?php
-
-use Illuminate\Support\Facades\DB;
-
-$productionRows = DB::table('production')->orderBy('id')->get();
-$productRows = DB::table('products')->orderBy('id')->get();
-?>
-
-<!DOCTYPE html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Production Table</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-
+@extends('layouts.app')
+@section('content')
 <body>
     <container class="container-fluid">
         <div class="product">
@@ -23,7 +7,7 @@ $productRows = DB::table('products')->orderBy('id')->get();
             <select name="product" id="productSelect">
                 <option value="0">Select a PCB</option>
                 @foreach($productRows as $row)
-                <option value="{{ $row->id}}"> {{ $row->pcb}} - {{ $row->id }}</option>
+                <option value="{{ $row->id }}"> {{ $row->pcb}} - {{ $row->id }}</option>
                 @endforeach
             </select>
         </div>
@@ -58,24 +42,24 @@ $productRows = DB::table('products')->orderBy('id')->get();
     </container>
 </body>
 <script>
-    $('#productSelect').change(function(){
+    $('#productSelect').change(function() {
         var selectedProductId = $('#productSelect option:selected');
 
-        if(selectedProductId.text !='Select a PCB'){
+        if (selectedProductId.text != 'Select a PCB') {
             var table = document.getElementById("productionsTable");
             var all_row = table.getElementsByTagName("tr");
-            for (var i=0; i<all_row.length;i++){
+            for (var i = 0; i < all_row.length; i++) {
                 var name_column = all_row[i].getElementsByTagName("td")[1];
-                if(name_column){
-                    var name_value = name_column.textContent || name_column.innerText;
-                    if(name_value.match(selectedProductId.val())){
-                        all_row[i].style.display="";
-                    }
-                    else{
-                        all_row[i].style.display="none";
+                if (name_column) {
+                    var name_value = name_column.innerText;
+                    if (name_value.match(selectedProductId.val())) {
+                        all_row[i].style.display = "";
+                    } else {
+                        all_row[i].style.display = "none";
                     }
                 }
             }
         }
     });
 </script>
+@endsection
