@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/production','HomeController@production')->name('production');
+Route::get('/delete/{id}','HomeController@delete')->name('delete');
 Route::get('/about','HomeController@about')->name('about');
