@@ -15,7 +15,7 @@ use app\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('production');
+    return view('welcome');
 });
 
 Route::get('/production','HomeController@production')->name('production');
