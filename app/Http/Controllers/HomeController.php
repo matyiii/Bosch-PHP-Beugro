@@ -19,6 +19,11 @@ class HomeController extends Controller
         return view('production',['productionRows'=>$productionRows,'productRows'=>$productRows]);
     }
 
+    public function delete($id){
+        DB::table('production')->where('id', $id)->delete();
+        return redirect('production');
+    }
+
     public function about(){
         return view('about');
     }
