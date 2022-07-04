@@ -11,6 +11,6 @@
     </div>
   </div>
   <span class="navbar-text">
-      Write your name here
+      Mezőfi Máté
     </span>
 </nav>
