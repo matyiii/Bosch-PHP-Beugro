@@ -14,8 +14,8 @@ class HomeController extends Controller
 
     public function production()
     {
-        $productionRows = DB::table('production')->orderBy('id')->get();
-        $productRows = DB::table('products')->orderBy('id')->get();
+        $productionRows = DB::table('production')->get();
+        $productRows = DB::table('products')->get();
         return view('production',['productionRows'=>$productionRows,'productRows'=>$productRows]);
     }
 
