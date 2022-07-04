@@ -30,9 +30,7 @@
                         <td>{{$row->startDate}}</td>
                         <td>{{$row->endDate}}</td>
                         <td>
-                            <button type="submit" title="delete">
-                                <i class="fas fa-trash fa-lg text-danger">Delete</i>
-                            </button>
+                            <a href='delete/{{ $row->id }}'><button type="button">Delete</button></a>
                         </td>
                     </tr>
                     @endforeach
