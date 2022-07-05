@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <body>
     <container class="container-fluid">
         <div class="product">
@@ -41,18 +42,18 @@
 </body>
 <script>
     $('#productSelect').change(function() {
-        var selectedProductId = $('#productSelect option:selected');
-
-        if (selectedProductId.text != 'Select a PCB') {
+        var selectedProductId = $('#productSelect').val();
+        if (selectedProductId != 0) {
             var table = document.getElementById("productionsTable");
             var all_row = table.getElementsByTagName("tr");
             for (var i = 0; i < all_row.length; i++) {
                 var name_column = all_row[i].getElementsByTagName("td")[1];
                 if (name_column) {
                     var name_value = name_column.innerText;
-                    if (name_value.match(selectedProductId.val())) {
+                    if (name_value.match(selectedProductId)) {
                         all_row[i].style.display = "";
                     } else {
+
                         all_row[i].style.display = "none";
                     }
                 }
