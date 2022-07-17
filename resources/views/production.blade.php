@@ -41,24 +41,27 @@
     </container>
 </body>
 <script>
-    $('#productSelect').change(function() {
-        var selectedProductId = $('#productSelect').val();
-        if (selectedProductId != 0) {
-            var table = document.getElementById("productionsTable");
-            var all_row = table.getElementsByTagName("tr");
-            for (var i = 0; i < all_row.length; i++) {
-                var name_column = all_row[i].getElementsByTagName("td")[1];
-                if (name_column) {
-                    var name_value = name_column.innerText;
-                    if (name_value.match(selectedProductId)) {
-                        all_row[i].style.display = "";
-                    } else {
-
-                        all_row[i].style.display = "none";
+    $('#productSelect').on("change",
+        function() {
+            var selectedProductId = $(this).find("option:selected").val();
+            if (selectedProductId == '0') {
+                $('#productionsTable tbody tr').each(
+                    function() {
+                        $(this).show();
                     }
-                }
+                )
+            } else {
+                $('#productionsTable tbody tr').each(
+                    function() {
+                        var col_id = $(this).find('td')[1].innerText;
+                        if (col_id !== selectedProductId) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    }
+                );
             }
-        }
-    });
+        });
 </script>
 @endsection
